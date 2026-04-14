@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dictionary App | Word Definitions & Pronunciation</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1> Dictionary Explorer</h1>
+            <p>Discover definitions, synonyms, and pronunciations for any word</p>
+        </header>
+
+        <!-- Search Form -->
+        <form id="searchForm" class="search-form" aria-label="Word search form">
+            <div class="search-wrapper">
+                <input 
+                    type="text" 
+                    id="wordInput" 
+                    class="search-input"
+                    placeholder="Enter a word (e.g., 'serendipity', 'ephemeral')"
+                    aria-label="Word to search"
+                    autocomplete="off"
+                    required
+                >
+                <button type="submit" class="search-btn" aria-label="Search word">
+                     Search
+                </button>
+            </div>
+        </form>
+
+        <!-- Loading Indicator -->
+        <div id="loadingIndicator" class="loading hidden" aria-live="polite">
+            <div class="spinner"></div>
+            <p>Fetching word data...</p>
+        </div>
+
+        <!-- Error Message -->
+        <div id="errorMessage" class="error-message hidden" aria-live="assertive"></div>
+
+        <!-- Results Section -->
+        <div id="results" class="results-section">
+            <!-- Word Header -->
+            <div id="wordHeader" class="word-header hidden">
+                <h2 id="wordTitle"></h2>
+                <button id="playAudio" class="audio-btn hidden" aria-label="Play pronunciation">
+                     Play Pronunciation
+                </button>
+            </div>
+
+            <!-- Definitions Section -->
+            <div id="definitionsSection" class="definitions-section hidden">
+                <h3> Definitions</h3>
+                <div id="definitionsList" class="definitions-list"></div>
+            </div>
+
+            <!-- Synonyms Section -->
+            <div id="synonymsSection" class="synonyms-section hidden">
+                <h3> Synonyms</h3>
+                <div id="synonymsList" class="synonyms-list"></div>
+            </div>
+
+            <!-- Placeholder for empty state -->
+            <div id="placeholder" class="placeholder">
+                <p> Enter a word above to see its definition, synonyms, and pronunciation</p>
+                <p class="example">Example: "happiness", "beautiful", "innovation"</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "dictionary-api-app",
+  "version": "1.0.0",
+  "description": "A dictionary app that fetches word definitions and pronunciations from an API",
+  "main": "index.js",
+  "scripts": {
+    "start": "http-server -p 3000",
+    "dev": "http-server -p 3000 -o"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  },
+  "keywords": ["dictionary", "api", "javascript"],
+  "author": "",
+  "license": "MIT"
+}
