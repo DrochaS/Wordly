@@ -19,7 +19,7 @@ const placeholder = document.getElementById('placeholder');
 // Audio object for pronunciation
 let currentAudio = null;
 
-// Helper Functions
+//  Functions
 function showLoading() {
     loadingIndicator.classList.remove('hidden');
     errorMessage.classList.add('hidden');
@@ -97,7 +97,7 @@ function displaySynonyms(synonyms) {
     }
 
     synonymsList.innerHTML = '';
-    // Remove duplicates and limit to 15
+    
     const uniqueSynonyms = [...new Set(synonyms)].slice(0, 15);
     
     uniqueSynonyms.forEach(synonym => {
@@ -105,7 +105,7 @@ function displaySynonyms(synonyms) {
         synonymTag.className = 'synonym-tag';
         synonymTag.textContent = synonym;
         
-        // Add click functionality to search for the synonym
+        
         synonymTag.addEventListener('click', () => {
             wordInput.value = synonym;
             searchForm.dispatchEvent(new Event('submit'));
@@ -115,7 +115,7 @@ function displaySynonyms(synonyms) {
     });
 }
 
-// Play Pronunciation
+// Play audio pronunciation
 function setupAudio(phonetics) {
     if (!phonetics || phonetics.length === 0) {
         playAudioBtn.classList.add('hidden');
