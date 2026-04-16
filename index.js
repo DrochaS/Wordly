@@ -19,7 +19,7 @@ const placeholder = document.getElementById('placeholder');
 // Audio object for pronunciation
 let currentAudio = null;
 
-//  Functions
+// Helper Functions
 function showLoading() {
     loadingIndicator.classList.remove('hidden');
     errorMessage.classList.add('hidden');
@@ -97,7 +97,7 @@ function displaySynonyms(synonyms) {
     }
 
     synonymsList.innerHTML = '';
-    
+    // Remove duplicates and limit to 15
     const uniqueSynonyms = [...new Set(synonyms)].slice(0, 15);
     
     uniqueSynonyms.forEach(synonym => {
@@ -105,7 +105,7 @@ function displaySynonyms(synonyms) {
         synonymTag.className = 'synonym-tag';
         synonymTag.textContent = synonym;
         
-        
+        // Add click functionality to search for the synonym
         synonymTag.addEventListener('click', () => {
             wordInput.value = synonym;
             searchForm.dispatchEvent(new Event('submit'));
@@ -115,7 +115,7 @@ function displaySynonyms(synonyms) {
     });
 }
 
-// Play audio pronunciation
+// Play Pronunciation - FIXED (removed cloneNode error)
 function setupAudio(phonetics) {
     if (!phonetics || phonetics.length === 0) {
         playAudioBtn.classList.add('hidden');
@@ -130,21 +130,15 @@ function setupAudio(phonetics) {
         currentAudio = new Audio(audioUrl);
         playAudioBtn.classList.remove('hidden');
         
-        // Remove existing listeners and add new one
-        const newPlayBtn = playAudioBtn.cloneNode(true);
-        playAudioBtn.parentNode.replaceChild(newPlayBtn, playAudioBtn);
-        
-        newPlayBtn.addEventListener('click', () => {
+        // FIXED: Simple click handler - no cloneNode error
+        playAudioBtn.onclick = () => {
             if (currentAudio) {
                 currentAudio.play().catch(err => {
                     console.error('Audio playback error:', err);
                     showError('Unable to play pronunciation. Audio file may be unavailable.');
                 });
             }
-        });
-        
-        // Update reference
-        window.playAudioBtn = newPlayBtn;
+        };
     } else {
         playAudioBtn.classList.add('hidden');
     }
@@ -253,6 +247,7 @@ function handleSubmit(event) {
 
 // Input validation on the fly
 wordInput.addEventListener('input', (event) => {
+    // Optional: Real-time validation feedback
     const value = event.target.value;
     if (value.length > 0 && !/^[a-zA-Z\s\-']+$/.test(value)) {
         wordInput.style.borderColor = '#ff9800';
@@ -275,7 +270,7 @@ wordInput.addEventListener('keypress', (event) => {
     }
 });
 
-// Focus on input on page load
+// Optional: Focus on input on page load
 wordInput.focus();
 
 // Console log to confirm script loaded
